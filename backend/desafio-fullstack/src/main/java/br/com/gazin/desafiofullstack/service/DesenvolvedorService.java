@@ -17,7 +17,7 @@ public class DesenvolvedorService {
         this.desenvolvedorRepository = desenvolvedorRepository;
     }
 
-    public List<DesenvolvedorDTO> findAll() {
+    public List<DesenvolvedorDTO> buscarTodos() {
         List<Desenvolvedor> desenvolvedorList = desenvolvedorRepository.findAll();
         List<DesenvolvedorDTO> dtoList = DesenvolvedorMapper.toDTOList(desenvolvedorList);
         return dtoList;

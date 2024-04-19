@@ -21,8 +21,8 @@ public class DesenvolvedorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DesenvolvedorDTO>> findAll() {
-        List<DesenvolvedorDTO> dtoListResponse = desenvolvedorService.findAll();
+    public ResponseEntity<List<DesenvolvedorDTO>> retornarTodos() {
+        List<DesenvolvedorDTO> dtoListResponse = desenvolvedorService.buscarTodos();
         return ResponseEntity.status(HttpStatus.OK).body(dtoListResponse);
     }
 

@@ -21,8 +21,8 @@ public class NivelController {
     }
 
     @GetMapping
-    public ResponseEntity<List<NivelDTO>> findAll() {
-        List<NivelDTO> dtoListResponse = nivelService.findAll();
+    public ResponseEntity<List<NivelDTO>> retornarTodos() {
+        List<NivelDTO> dtoListResponse = nivelService.buscarTodos();
         return ResponseEntity.status(HttpStatus.OK).body(dtoListResponse);
     }
 

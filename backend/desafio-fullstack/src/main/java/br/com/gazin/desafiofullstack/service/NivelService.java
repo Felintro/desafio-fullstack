@@ -17,7 +17,7 @@ public class NivelService {
         this.nivelRepository = nivelRepository;
     }
 
-    public List<NivelDTO> findAll() {
+    public List<NivelDTO> buscarTodos() {
         List<Nivel> nivelList = nivelRepository.findAll();
         List<NivelDTO> dtoList = NivelMapper.toDTOList(nivelList);
         return dtoList;
