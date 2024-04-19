@@ -11,20 +11,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "developer")
+@Table(name = "nivel")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Level {
+public class Nivel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "ds_level", nullable = false)
-    private String level;
+    @Column(name = "ds_nivel", nullable = false)
+    private String nivel;
 
 }
