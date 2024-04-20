@@ -3,15 +3,13 @@ package br.com.gazin.desafiofullstack.controller;
 import br.com.gazin.desafiofullstack.dto.CadastrarNivelDTO;
 import br.com.gazin.desafiofullstack.dto.NivelDTO;
 import br.com.gazin.desafiofullstack.service.NivelService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.PersistenceException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,16 +39,26 @@ public class NivelController {
     }
 
     @PostMapping
-    public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody CadastrarNivelDTO dto) throws JsonProcessingException {
-        var nivelDTO = nivelService.cadastrar(dto.nivel());
+    public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody CadastrarNivelDTO corpoRequisicaoDTO) {
+        var nivelDTO = nivelService.cadastrar(corpoRequisicaoDTO.nivel());
         return ResponseEntity.status(HttpStatus.CREATED).body(nivelDTO);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody CadastrarNivelDTO corpoRequisicaoDTO) {
+        try {
+            var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO.nivel());
+            return ResponseEntity.status(HttpStatus.OK).body(nivelDTO);
+        } catch(PersistenceException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id informado é inválido!");
+        }
+    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity deletarPorId(@PathVariable Integer id) {
+    public ResponseEntity<String> deletarPorId(@PathVariable Integer id) {
         try {
             nivelService.deletarPorId(id);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Nível removido com sucesso!");
+            return ResponseEntity.noContent().build();
         } catch(PersistenceException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem desenvolvedores associados a este nível!");
         }
