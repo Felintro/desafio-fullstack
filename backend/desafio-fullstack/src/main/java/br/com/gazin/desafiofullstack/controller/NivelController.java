@@ -1,11 +1,13 @@
 package br.com.gazin.desafiofullstack.controller;
 
+import br.com.gazin.desafiofullstack.dto.CadastrarNivelDTO;
 import br.com.gazin.desafiofullstack.dto.NivelDTO;
 import br.com.gazin.desafiofullstack.service.NivelService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.PersistenceException;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,12 +41,8 @@ public class NivelController {
     }
 
     @PostMapping
-    public ResponseEntity<NivelDTO> cadastrar(@RequestBody String json) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(json);
-        String nivel = jsonNode.get("nivel").asText();
-
-        var nivelDTO = nivelService.cadastrar(nivel);
+    public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody CadastrarNivelDTO dto) throws JsonProcessingException {
+        var nivelDTO = nivelService.cadastrar(dto.nivel());
         return ResponseEntity.status(HttpStatus.CREATED).body(nivelDTO);
     }
 
