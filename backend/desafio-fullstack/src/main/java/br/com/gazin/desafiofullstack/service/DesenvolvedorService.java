@@ -25,8 +25,8 @@ public class DesenvolvedorService {
 
     public DesenvolvedorDTO cadastrar(CadastrarDesenvolvedorDTO cadastrarDesenvolvedorDTO) {
         var desenvolvedor = DesenvolvedorMapper.toEntity(cadastrarDesenvolvedorDTO);
-        desenvolvedorRepository.save(desenvolvedor);
-        var desenvolvedorAtualizado = desenvolvedorRepository.findById(desenvolvedor.getId()).get();
+        desenvolvedorRepository.saveAndFlush(desenvolvedor);
+        var desenvolvedorAtualizado = desenvolvedorRepository.getReferenceById(desenvolvedor.getId());
         return DesenvolvedorMapper.toDTO(desenvolvedorAtualizado);
     }
 
