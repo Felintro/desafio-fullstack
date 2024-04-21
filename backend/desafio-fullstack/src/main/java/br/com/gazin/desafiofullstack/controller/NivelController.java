@@ -28,25 +28,25 @@ public class NivelController {
 
     @GetMapping
     public ResponseEntity<List<NivelDTO>> retornarTodos() {
-        var dtoListResponse = nivelService.buscarTodos();
-        if(dtoListResponse.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dtoListResponse);
+        var dtoListResposta = nivelService.buscarTodos();
+        if(dtoListResposta.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(dtoListResposta);
         } else {
-            return ResponseEntity.status(HttpStatus.OK).body(dtoListResponse);
+            return ResponseEntity.status(HttpStatus.OK).body(dtoListResposta);
         }
     }
 
     @PostMapping
     public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
-        var nivelDTO = nivelService.cadastrar(corpoRequisicaoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nivelDTO);
+        var dtoResposta = nivelService.cadastrar(corpoRequisicaoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dtoResposta);
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
         try {
-            var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO);
-            return ResponseEntity.ok().body(nivelDTO);
+            var dtoResposta = nivelService.atualizar(id, corpoRequisicaoDTO);
+            return ResponseEntity.ok().body(dtoResposta);
         } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
