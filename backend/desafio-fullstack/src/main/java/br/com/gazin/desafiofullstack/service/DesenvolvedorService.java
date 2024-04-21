@@ -3,6 +3,7 @@ package br.com.gazin.desafiofullstack.service;
 import br.com.gazin.desafiofullstack.dto.CadastrarDesenvolvedorDTO;
 import br.com.gazin.desafiofullstack.dto.DesenvolvedorDTO;
 import br.com.gazin.desafiofullstack.persistence.DesenvolvedorRepository;
+import br.com.gazin.desafiofullstack.persistence.NivelRepository;
 import br.com.gazin.desafiofullstack.utils.DesenvolvedorMapper;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,11 @@ import java.util.List;
 public class DesenvolvedorService {
 
     private DesenvolvedorRepository desenvolvedorRepository;
+    private NivelRepository nivelRepository;
 
-    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository) {
+    public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository, NivelRepository nivelRepository) {
         this.desenvolvedorRepository = desenvolvedorRepository;
+        this.nivelRepository = nivelRepository;
     }
 
     public List<DesenvolvedorDTO> buscarTodos() {
@@ -25,9 +28,10 @@ public class DesenvolvedorService {
 
     public DesenvolvedorDTO cadastrar(CadastrarDesenvolvedorDTO cadastrarDesenvolvedorDTO) {
         var desenvolvedor = DesenvolvedorMapper.toEntity(cadastrarDesenvolvedorDTO);
-        desenvolvedorRepository.saveAndFlush(desenvolvedor);
-        var desenvolvedorAtualizado = desenvolvedorRepository.getReferenceById(desenvolvedor.getId());
-        return DesenvolvedorMapper.toDTO(desenvolvedorAtualizado);
+        var nivel = nivelRepository.findById(cadastrarDesenvolvedorDTO.nivelId()).get();
+        desenvolvedor.setNivel(nivel);
+        desenvolvedorRepository.save(desenvolvedor);
+        return DesenvolvedorMapper.toDTO(desenvolvedor);
     }
 
 }
