@@ -8,11 +8,11 @@ import java.util.List;
 
 public class NivelMapper {
 
-    static Nivel toEntity(NivelDTO nivelDTO) {
+    public static Nivel toEntity(NivelDTO nivelDTO) {
         return new Nivel(nivelDTO.id(), nivelDTO.nivel());
     }
 
-    static NivelDTO toDTO(Nivel nivel) {
+    public static NivelDTO toDTO(Nivel nivel) {
         return new NivelDTO(nivel.getId(), nivel.getNivel());
     }
 

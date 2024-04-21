@@ -34,4 +34,11 @@ public class NivelService {
         nivelRepository.save(nivel);
         return NivelMapper.toDTO(nivel);
     }
+
+    public NivelDTO atualizar(Integer id, String novoNivel) {
+        var nivel = nivelRepository.findById(id).orElseThrow(PersistenceException::new);
+        nivel.setNivel(novoNivel);
+        nivelRepository.save(nivel);
+        return NivelMapper.toDTO(nivel);
+    }
 }
