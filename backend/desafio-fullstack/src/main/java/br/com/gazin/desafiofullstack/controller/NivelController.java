@@ -1,6 +1,5 @@
 package br.com.gazin.desafiofullstack.controller;
 
-import br.com.gazin.desafiofullstack.dto.CadastrarNivelDTO;
 import br.com.gazin.desafiofullstack.dto.NivelDTO;
 import br.com.gazin.desafiofullstack.service.NivelService;
 import jakarta.persistence.PersistenceException;
@@ -39,15 +38,15 @@ public class NivelController {
     }
 
     @PostMapping
-    public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody CadastrarNivelDTO corpoRequisicaoDTO) {
-        var nivelDTO = nivelService.cadastrar(corpoRequisicaoDTO.nivel());
+    public ResponseEntity<NivelDTO> cadastrar(@Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
+        var nivelDTO = nivelService.cadastrar(corpoRequisicaoDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(nivelDTO);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody CadastrarNivelDTO corpoRequisicaoDTO) {
+    public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
         try {
-            var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO.nivel());
+            var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO);
             return ResponseEntity.status(HttpStatus.OK).body(nivelDTO);
         } catch(PersistenceException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id informado é inválido!");

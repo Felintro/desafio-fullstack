@@ -24,15 +24,15 @@ public class NivelService {
         return dtoList;
     }
 
-    public NivelDTO cadastrar(String nomeNivel) {
-        var nivel = new Nivel(null, nomeNivel);
+    public NivelDTO cadastrar(NivelDTO nivelDTO) {
+        var nivel = NivelMapper.toEntity(nivelDTO);
         nivelRepository.save(nivel);
         return NivelMapper.toDTO(nivel);
     }
 
-    public NivelDTO atualizar(Integer id, String novoNivel) {
+    public NivelDTO atualizar(Integer id, NivelDTO nivelDTO) {
         var nivel = nivelRepository.findById(id).orElseThrow(PersistenceException::new);
-        nivel.setNivel(novoNivel);
+        nivel.setNivel(nivelDTO.nivel());
         nivelRepository.save(nivel);
         return NivelMapper.toDTO(nivel);
     }
