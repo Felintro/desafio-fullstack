@@ -10,11 +10,6 @@ import java.util.List;
 
 public class DesenvolvedorMapper {
 
-    /* FIXME - Remover caso não for utilizar*/
-    public static Desenvolvedor toEntity(DesenvolvedorDTO desenvolvedorDTO) {
-        return new Desenvolvedor(desenvolvedorDTO.id(), NivelMapper.toEntity(desenvolvedorDTO.nivelDTO()), desenvolvedorDTO.nome(), desenvolvedorDTO.sexo(), desenvolvedorDTO.dataNascimento(), desenvolvedorDTO.idade(), desenvolvedorDTO.hobby());
-    }
-
     public static Desenvolvedor toEntity(CadastrarDesenvolvedorDTO cadastrarDesenvolvedorDTO) {
         return new Desenvolvedor(null, new Nivel(cadastrarDesenvolvedorDTO.nivelId(), null), cadastrarDesenvolvedorDTO.nome(), cadastrarDesenvolvedorDTO.sexo(), cadastrarDesenvolvedorDTO.dataNascimento(), cadastrarDesenvolvedorDTO.idade(), cadastrarDesenvolvedorDTO.hobby());
     }
