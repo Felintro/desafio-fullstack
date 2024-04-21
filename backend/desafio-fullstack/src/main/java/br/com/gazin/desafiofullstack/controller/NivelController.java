@@ -60,7 +60,7 @@ public class NivelController {
             nivelService.deletarPorId(id);
             return ResponseEntity.noContent().build();
         } catch(PersistenceException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Existem desenvolvedores associados a este nível!");
+            return ResponseEntity.badRequest().body("Existem desenvolvedores associados a este nível!");
         }
     }
 

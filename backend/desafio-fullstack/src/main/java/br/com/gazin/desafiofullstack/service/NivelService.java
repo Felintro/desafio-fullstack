@@ -24,11 +24,6 @@ public class NivelService {
         return dtoList;
     }
 
-    public void deletarPorId(Integer id) {
-        var nivel = nivelRepository.findById(id).orElseThrow(PersistenceException::new);
-        nivelRepository.delete(nivel);
-    }
-
     public NivelDTO cadastrar(String nomeNivel) {
         var nivel = new Nivel(null, nomeNivel);
         nivelRepository.save(nivel);
@@ -41,4 +36,10 @@ public class NivelService {
         nivelRepository.save(nivel);
         return NivelMapper.toDTO(nivel);
     }
+
+    public void deletarPorId(Integer id) {
+        var nivel = nivelRepository.findById(id).orElseThrow(PersistenceException::new);
+        nivelRepository.delete(nivel);
+    }
+
 }
