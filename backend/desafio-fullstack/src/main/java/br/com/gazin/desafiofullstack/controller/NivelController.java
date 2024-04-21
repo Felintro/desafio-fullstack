@@ -2,8 +2,6 @@ package br.com.gazin.desafiofullstack.controller;
 
 import br.com.gazin.desafiofullstack.dto.NivelDTO;
 import br.com.gazin.desafiofullstack.service.NivelService;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.PersistenceException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,9 +46,9 @@ public class NivelController {
     public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
         try {
             var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(nivelDTO);
+            return ResponseEntity.ok().body(nivelDTO);
         } catch(Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
@@ -59,7 +57,7 @@ public class NivelController {
         try {
             nivelService.deletarPorId(id);
             return ResponseEntity.noContent().build();
-        } catch(PersistenceException e) {
+        } catch(Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }

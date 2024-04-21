@@ -4,6 +4,8 @@ import br.com.gazin.desafiofullstack.dto.NivelDTO;
 import br.com.gazin.desafiofullstack.persistence.NivelRepository;
 import br.com.gazin.desafiofullstack.utils.NivelMapper;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 public class NivelService {
 
     private final String NIVEL_NAO_ENCONTRADO = "O nível não foi encontrado! ID: ";
+    private final String DESENVOLVEDORES_ASSOCIADOS = "Existem desenvolvedores associados a este nível! ID: ";
 
     private NivelRepository nivelRepository;
 
@@ -39,8 +42,14 @@ public class NivelService {
     }
 
     public void deletarPorId(Integer id) {
-        var nivel = nivelRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(NIVEL_NAO_ENCONTRADO + id));
-        nivelRepository.delete(nivel);
+        try {
+            var nivel = nivelRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(NIVEL_NAO_ENCONTRADO + id));
+            nivelRepository.delete(nivel);
+        } catch(EntityNotFoundException e) {
+            throw new EntityNotFoundException(e.getMessage());
+        } catch(DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException(DESENVOLVEDORES_ASSOCIADOS + id);
+        }
     }
 
 }
