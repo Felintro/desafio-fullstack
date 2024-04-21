@@ -14,9 +14,10 @@ import java.util.List;
 public class DesenvolvedorService {
 
     private static final String DESENVOLVEDOR_NAO_ENCONTRADO = "O desenvolvedor não foi encontrado! ID: ";
+    private static final String NIVEL_NAO_ENCONTRADO = "O nível não foi encontrado! ID: ";
 
-    private DesenvolvedorRepository desenvolvedorRepository;
-    private NivelRepository nivelRepository;
+    private final DesenvolvedorRepository desenvolvedorRepository;
+    private final NivelRepository nivelRepository;
 
     public DesenvolvedorService(DesenvolvedorRepository desenvolvedorRepository, NivelRepository nivelRepository) {
         this.desenvolvedorRepository = desenvolvedorRepository;
@@ -33,6 +34,21 @@ public class DesenvolvedorService {
         var desenvolvedor = DesenvolvedorMapper.toEntity(cadastrarDesenvolvedorDTO);
         var nivel = nivelRepository.findById(cadastrarDesenvolvedorDTO.nivelId()).get();
         desenvolvedor.setNivel(nivel);
+        desenvolvedorRepository.save(desenvolvedor);
+        return DesenvolvedorMapper.toDTO(desenvolvedor);
+    }
+
+    public DesenvolvedorDTO atualizar(Integer id, CadastrarDesenvolvedorDTO cadastrarDesenvolvedorDTO) {
+        var desenvolvedor = desenvolvedorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(DESENVOLVEDOR_NAO_ENCONTRADO + id));
+        var nivel = nivelRepository.findById(cadastrarDesenvolvedorDTO.nivelId()).orElseThrow(() -> new EntityNotFoundException(NIVEL_NAO_ENCONTRADO + cadastrarDesenvolvedorDTO.nivelId()));
+
+        desenvolvedor.setNome(cadastrarDesenvolvedorDTO.nome());
+        desenvolvedor.setHobby(cadastrarDesenvolvedorDTO.hobby());
+        desenvolvedor.setIdade(cadastrarDesenvolvedorDTO.idade());
+        desenvolvedor.setNivel(nivel);
+        desenvolvedor.setSexo(cadastrarDesenvolvedorDTO.sexo());
+        desenvolvedor.setDataNascimento(cadastrarDesenvolvedorDTO.dataNascimento());
+
         desenvolvedorRepository.save(desenvolvedor);
         return DesenvolvedorMapper.toDTO(desenvolvedor);
     }

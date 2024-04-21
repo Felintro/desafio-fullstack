@@ -15,7 +15,7 @@ public class NivelService {
     private final String NIVEL_NAO_ENCONTRADO = "O nível não foi encontrado! ID: ";
     private final String DESENVOLVEDORES_ASSOCIADOS = "Existem desenvolvedores associados a este nível! ID: ";
 
-    private NivelRepository nivelRepository;
+    private final NivelRepository nivelRepository;
 
     public NivelService(NivelRepository nivelRepository) {
         this.nivelRepository = nivelRepository;
