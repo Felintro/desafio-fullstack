@@ -5,12 +5,15 @@ import br.com.gazin.desafiofullstack.dto.DesenvolvedorDTO;
 import br.com.gazin.desafiofullstack.persistence.DesenvolvedorRepository;
 import br.com.gazin.desafiofullstack.persistence.NivelRepository;
 import br.com.gazin.desafiofullstack.utils.DesenvolvedorMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class DesenvolvedorService {
+
+    private static final String DESENVOLVEDOR_NAO_ENCONTRADO = "O desenvolvedor não foi encontrado! ID: ";
 
     private DesenvolvedorRepository desenvolvedorRepository;
     private NivelRepository nivelRepository;
@@ -32,6 +35,11 @@ public class DesenvolvedorService {
         desenvolvedor.setNivel(nivel);
         desenvolvedorRepository.save(desenvolvedor);
         return DesenvolvedorMapper.toDTO(desenvolvedor);
+    }
+
+    public void deletarPorId(Integer id) {
+        var desenvolvedor = desenvolvedorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(DESENVOLVEDOR_NAO_ENCONTRADO + id));
+        desenvolvedorRepository.delete(desenvolvedor);
     }
 
 }
