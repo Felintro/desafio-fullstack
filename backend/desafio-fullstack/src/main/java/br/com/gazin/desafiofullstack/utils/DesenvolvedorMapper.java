@@ -9,11 +9,11 @@ import java.util.List;
 
 public class DesenvolvedorMapper {
 
-    static Desenvolvedor toEntity(DesenvolvedorDTO desenvolvedorDTO) {
+    public static Desenvolvedor toEntity(DesenvolvedorDTO desenvolvedorDTO) {
         return new Desenvolvedor(null, new Nivel(desenvolvedorDTO.nivelId(), null), desenvolvedorDTO.nome(), desenvolvedorDTO.dataNascimento(), desenvolvedorDTO.idade(), desenvolvedorDTO.hobby());
     }
 
-    static DesenvolvedorDTO toDTO(Desenvolvedor desenvolvedor) {
+    public static DesenvolvedorDTO toDTO(Desenvolvedor desenvolvedor) {
         return new DesenvolvedorDTO(desenvolvedor.getId(), desenvolvedor.getNivel().getId(), desenvolvedor.getNome(), desenvolvedor.getDataNascimento(), desenvolvedor.getIdade(), desenvolvedor.getHobby());
     }
 
