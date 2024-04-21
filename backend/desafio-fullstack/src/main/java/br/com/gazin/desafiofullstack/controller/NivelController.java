@@ -45,12 +45,8 @@ public class NivelController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Object> atualizar(@PathVariable Integer id, @Valid @RequestBody NivelDTO corpoRequisicaoDTO) {
-        try {
-            var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO);
-            return ResponseEntity.status(HttpStatus.OK).body(nivelDTO);
-        } catch(PersistenceException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("O id informado é inválido!");
-        }
+        var nivelDTO = nivelService.atualizar(id, corpoRequisicaoDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(nivelDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -59,7 +55,7 @@ public class NivelController {
             nivelService.deletarPorId(id);
             return ResponseEntity.noContent().build();
         } catch(PersistenceException e) {
-            return ResponseEntity.badRequest().body("Existem desenvolvedores associados a este nível!");
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
