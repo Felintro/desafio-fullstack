@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  backend-container:
+    container_name: backend-container
+    image: backend
+    build: .
+    ports:
+      - 8082:8082
