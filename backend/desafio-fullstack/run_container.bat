@@ -1,1 +1,1 @@
-docker run -d -p 8082:8082 --name app-container app-image
+docker run -d -p 8082:8082 --name backend-container backend

@@ -1,1 +1,1 @@
-docker stop app-container && docker rm app-container && docker image rm app-image
+docker stop backend-container && docker rm backend-container && docker image rm backend

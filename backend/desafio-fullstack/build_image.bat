@@ -1,1 +1,1 @@
-docker build -t app-image .
+docker build -t backend .
