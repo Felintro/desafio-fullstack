@@ -1,1 +1,1 @@
-# desafio-fullstack
+O POST em "/api/niveis" retornará http 400 caso a requisição for inválida automaticamente pela anotação @Valid
