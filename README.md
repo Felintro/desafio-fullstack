@@ -46,6 +46,7 @@ Para instalar e executar o projeto, abra os diretórios e execute os comandos de
 - O frontend poderá ser acessado no endereço: `http://localhost:8081/browser`.
 - A api disponibilizada no backend estará disponível no endereço: `http://localhost:8082/`.
 - O banco de dados está configurado no endereço `http://localhost:8082/h2-console` e pode ser acessado com as credenciais abaixo:
+  - Url: jdbc:h2:mem:gazin;
   - Username: sa;
   - Password: sa;
 
