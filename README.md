@@ -51,16 +51,16 @@ Para instalar e executar o projeto, abra os diretórios e execute os comandos de
 
 ## ⚙️ Endpoints disponibilizados:
 
-| Método HTTP | Endpoint                   | Descrição                                   | Corpo da requisição | Corpo da resposta                 |
-|-------------|----------------------------|---------------------------------------------|---------------------|-----------------------------------|
-| GET         | `/api/niveis`              | Busca e retorna todos os níveis cadastrados | Vazio               | Todos níveis cadastrados          |
-| POST        | `/api/niveis`              | Registra um novo nível                      | JSON abaixo         | Nível recém-cadastrado            |
-| PATCH       | `/api/niveis`              | Atualiza um nível existente                 | JSON abaixo         | Nível atualizado                  |
-| DELETE      | `/api/niveis/:id`          | Exclui um nível existente                   | Vazio               | Vazio                             |
-| GET         | `/api/desenvolvedores`     | Registra um novo pedido                     | Vazio               | Todos desenvolvedores cadastrados |
-| POST        | `/api/desenvolvedores`     | Registra um novo pedido                     | JSON abaixo         | Desenvolvedor recém-cadastrado    |
-| PATCH       | `/api/desenvolvedores`     | Registra um novo pedido                     | JSON abaixo         | Desenvolvedor atualizado          |
-| DELETE      | `/api/desenvolvedores/:id` | Cancela um pedido pré-existente             | Vazio               | Vazio                             |
+| Método HTTP | Endpoint                    | Descrição                                   | Corpo da requisição | Corpo da resposta                 |
+|-------------|-----------------------------|---------------------------------------------|---------------------|-----------------------------------|
+| GET         | `/api/niveis`               | Busca e retorna todos os níveis cadastrados | Vazio               | Todos níveis cadastrados          |
+| POST        | `/api/niveis`               | Registra um novo nível                      | JSON abaixo         | Nível recém-cadastrado            |
+| PATCH       | `/api/niveis/{id}`          | Atualiza um nível existente                 | JSON abaixo         | Nível atualizado                  |
+| DELETE      | `/api/niveis/{id}`          | Exclui um nível existente                   | Vazio               | Vazio                             |
+| GET         | `/api/desenvolvedores`      | Registra um novo pedido                     | Vazio               | Todos desenvolvedores cadastrados |
+| POST        | `/api/desenvolvedores`      | Registra um novo pedido                     | JSON abaixo         | Desenvolvedor recém-cadastrado    |
+| PATCH       | `/api/desenvolvedores/{id}` | Registra um novo pedido                     | JSON abaixo         | Desenvolvedor atualizado          |
+| DELETE      | `/api/desenvolvedores/{id}` | Cancela um pedido pré-existente             | Vazio               | Vazio                             |
 
 ### Corpo da requisição:
 
@@ -72,6 +72,7 @@ Para instalar e executar o projeto, abra os diretórios e execute os comandos de
       "nome": "Nome do Desenvolvedor",
       "sexo": "M",
       "datanascimento": "1990-01-01",
+	  "idade":25,
       "hobby": "Programação"
   }
    ```
